@@ -3,6 +3,24 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Hide scrollbars globally */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+  width: 0px; /* Chrome, Safari */
+  height: 0px;
+  background: transparent; /* Optional: for completeness */
+}
+
+*,
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -51,8 +69,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.5 0.2 240);
+  --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -85,8 +103,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.5 0.2 240);
+  --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -118,5 +136,62 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.bg-gradient-light {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 300% 300%;
+  animation: gradientAnimationLight 6s ease infinite;
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, #141e30, #243b55, #1e3c72, #2a5298);
+  background-size: 300% 300%;
+  animation: gradientAnimationDark 6s ease infinite;
+}
+
+@keyframes gradientAnimationLight {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradientAnimationDark {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
   }
 }
